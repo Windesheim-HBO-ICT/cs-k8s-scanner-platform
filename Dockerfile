@@ -17,6 +17,13 @@ RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build \
 
 FROM scratch
 
+ARG APP_VERSION=dev
+
+LABEL org.opencontainers.image.title="Scanner Platform testapp" \
+      org.opencontainers.image.description="Kubernetes testapp for Deployment, Service, ConfigMap, Secret and rolling update validation." \
+      org.opencontainers.image.source="https://github.com/Windesheim-HBO-ICT/cs-k8s-scanner-platform" \
+      org.opencontainers.image.version="${APP_VERSION}"
+
 USER 65532:65532
 COPY --from=build /out/scanner-platform /scanner-platform
 
